@@ -19,7 +19,7 @@ router.post('/wx/msg',async c => {
             fromUserName : data.ToUserName,
             msgtype : '',
             msgtime : parseInt(Date.now() / 1000),
-            msg : '欢迎关注公众号'
+            msg : ''
         };
         c.res.body = wxmsg.msgDispatch(data,retmsg);
     } catch (err) {

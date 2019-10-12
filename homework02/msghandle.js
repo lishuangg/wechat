@@ -15,12 +15,13 @@ function userMsg(wxmsg,retmsg){
             case '帮助':
             case 'help':
             case '?':
+            case '？':
                 retmsg.msg = help();
                 retmsg.msgtype = 'text';
                 return formatMsg(retmsg);
             case 'about':
                 retmsg.msgtype = 'text';
-                retmsg.msg = '我是这个测试号的开发者,如果有问题请输入"help"或者"帮助"';
+                retmsg.msg = '我是这个测试号的开发者,如果有问题请输入"help"、"？"或者"帮助"，输入"who"可以得到开发者信息';
                 return formatMsg(retmsg);
             case 'who':
                 retmsg.msgtype = 'text';
