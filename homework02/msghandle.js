@@ -45,9 +45,35 @@ function userMsg(wxmsg,retmsg){
     }
 }
 
+//处理事件信息
+function eventMsg(wxmsg,retmsg){
+    retmsg.msgtype = 'text';
+    switch(wxmsg.Event){
+        case 'subscribe':
+            retmsg.msg='你好，这是一个测试号，欢迎关注'
+            return formatMsg(retmsg);
+        case 'unsubscribe':
+            console.log(wxmsg.FromUserName,'取消关注');
+            break;
+        case 'CLICK':
+            retmsg.msg = wxmsg.EventKey;
+            return formatMsg(retmsg);
+        case 'VIEW':
+            console.log('用户浏览',wxmsg.EventKey);
+            break;
+        default:
+            return '';
+    }
+}
+
 exports.help = help;
 exports.userMsg = userMsg;
+exports.eventMsg = eventMsg;
 
+//引入模块
 exports.msgDispatch = function(wxmsg,retmsg){
-    return userMsg(wxmsg,retmsg);
+    if(wxmsg.MsgType == 'event'){
+        return eventMsg(wxmsg,retmsg);//处理事件消息
+    }
+    return userMsg(wxmsg,retmsg);//处理用户消息
 }
